@@ -1,0 +1,24 @@
+{% extends 'myapp/base.html' %}
+
+{% block body %}
+
+    <div class="flex flex-col justify-center items-center w-full h-[50vh]">
+        <div class="font-mono flex justify-center items-center flex-col">
+            <span class="text-red-500">
+                You are trying to access an 
+                <span class="text-red-600 font-bold">Invalid Request</span>
+            </span>
+            <br>
+
+            <span>
+                <span>
+                    <a href="{% url 'myapp:index' %}" class="text-indigo-500">Click Here</a>
+                    to go to home page</span>
+            </span>
+
+
+        </div>
+    </div>
+
+
+{% endblock %}

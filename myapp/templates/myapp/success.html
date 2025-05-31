@@ -1,0 +1,13 @@
+{% extends 'myapp/base.html' %}
+
+{% block body %}
+
+    <div class="font-mono w-full flex justify-center items-center h-[50vh]">
+
+        <a class="bg-green-200 py-3 px-6 rounded-lg text-lg text-blue-500" href="{{ order.product.file.url }}" download>Click Here to Download</a>
+    </div>
+
+
+
+
+{% endblock %}

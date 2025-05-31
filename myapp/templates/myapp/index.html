@@ -1,0 +1,50 @@
+{% extends 'myapp/base.html' %}
+
+{% block body %}
+
+<section>
+    <div class="mt-10 p-5 grid grid-cols-4 gap-5">
+        {% for product in products %}
+
+            <!-- Card -->
+            <div class="flex justify-center items-center">
+
+                <div class="w-full rounded-lg shadow-xl flex flex-col items-center justify-center p-3 h-fit">
+                    <div class="">
+                        <!-- <img src="https://community.softr.io/uploads/db9110/original/2X/7/74e6e7e382d0ff5d7773ca9a87e6f6f8817a68a6.jpeg" alt="Image"> -->
+                        <img src="{{ product.file.url }}" alt="Image"
+                        class="w-full object-cover rounded-lg shadow-md change-height">
+    
+                    </div>
+    
+                    <div class="mt-2 p-4 font-mono">
+                        <h1 class="font-bold text-xl my-3">{{ product.name }}</h1>
+                        <p>{{ product.description }}</p>
+                        <p class="text-green-600 font-bold mt-2"> ₹ {{ product.price }}</p>
+                    </div>
+    
+                    <a href="{% url 'myapp:product_detail' product.id %}">
+                        <button class="rounded-full bg-blue-500 text-white px-4 py-2 cursor-pointer hover:bg-blue-600">View Details</button>
+                    </a>
+    
+                </div>
+            </div>
+
+        
+
+        {% endfor %}
+    </div>
+</section>
+
+
+<script>
+    const changeHeight = document.getElementsByClassName('change-height');
+    Array.from(changeHeight).forEach((element) => {
+        const width = element.offsetWidth + 'px';
+        element.style.maxHeight = width;
+    });
+
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'myapp/base.html' %}
+
+{% block body %}
+
+
+    <div class="py-3 pl-12 pr-6 space-y-10">
+        <div>
+            <div class="flex justify-center items-center">
+                <div class="font-mono text-xl font-semibold text-[#524D4D]">
+                    My Purchases
+                </div>
+            </div>
+        </div>
+
+        <div class="shadow-xl px-4 py-8">
+            <div class="grid grid-cols-4 gap-y-4">
+                <div class="font-mono font-bold flex justify-center">Product Name</div>
+                <div class="font-mono font-bold flex justify-center">Quantity</div>
+                <div class="font-mono font-bold flex justify-center">Purchase Date</div>
+                <div class="font-mono font-bold flex justify-center">Download Link</div>
+
+                <hr><hr><hr><hr>
+
+                {% for order in orders %} 
+                    <div class="flex justify-center font-mono">
+                        <a href="{% url 'myapp:product_detail' order.product.id %}">{{ order.product.name }}</a>
+                    </div>
+                    <div class="flex justify-center text-green-500">{{ order.quantity }}</div>
+                    <div class="flex justify-center">{{ order.created_on }}</div>
+                    <div class="flex justify-center space-x-1">
+                        <a href="{{ order.product.file.url }}" download class="text-indigo-400">Click Here</a> 
+                        <span>to Download</span>
+                    </div>
+
+
+                {% endfor %}
+                
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+                {% for product in orders %}
+                    <div class="group w-full grid grid-cols-2
+                    shadow-lg rounded-md bg-[#FBEBFF]">
+                        <div class="p-2 flex gap-3 items-center">
+                            <div class="w-50 flex justify-center items-center">
+                                <!-- <img src="" alt="" 
+                                class="h-25 rounded-md"> -->
+
+                            </div>
+
+                            <div class="ml-5 flex gap-5">
+                                <div class="hidden group-hover:block">
+                                    <a href=""><button class="px-5 py-2 rounded-full cursor-pointer bg-green-400 text-white hover:bg-green-500">Edit</button></a>
+                                </div>
+                                <div class="hidden group-hover:block">
+                                    <a href=""><button class="px-5 py-2 rounded-full cursor-pointer bg-red-400 text-white hover:bg-red-500">Delete</button></a>
+                                </div>
+                            </div>
+
+
+                        </div>
+                            
+
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="text-2xl text-green-500">₹ 60000</div>
+                                <div class="text-xs">Total earnings</div>
+                            </div>
+                            <div>
+                                <div class="text-2xl">50</div>
+                                <div class="text-xs">Total orders</div>
+                            </div>
+                            <div class="pr-5">
+                                <div class="text-2xl text-green-400">4.8</div>
+                                <div class="text-xs">Rating</div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}    

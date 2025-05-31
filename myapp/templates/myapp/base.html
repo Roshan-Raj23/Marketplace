@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="shortcut icon" type="image/png" href="{% static 'myapp/icon.png' %}" >
+    <link rel="stylesheet" href="{% static 'myapp/style.css' %}">
+    <title>Digital Marketplace</title>
+</head>
+<body>
+
+    <nav class="top-0 shadow-lg fixed z-10 w-full bg-white" id="navbar">
+        <div class="flex flex-wrap justify-between p-4">
+            <a class="flex items-center space-x-2" href="/">
+                <img class="h-9"
+                src="https://cdn4.iconfinder.com/data/icons/miu-square-gloss-social/60/app_store-square-gloss-social-media-1024.png" alt="">
+                <span class="text-lg font-monospace">Digital Marketplace</span>
+            </a>
+
+            <div class="flex items-center gap-5 font-medium text-slate-gray">
+                <a href="{% url 'myapp:dashboard' %}">Dashboard</a>
+                <a href="{% url 'myapp:sales' %}">Sales</a>
+                <a href="">Orders</a>
+                <a href="{% url 'myapp:create_product' %}">Create Products</a>
+                <a href="{% url 'myapp:my_purchases' %}">My Purchases</a>
+
+
+                {% if user.is_authenticated %}
+                    <a href="{% url 'myapp:logout' %}">Logout</a>
+                {% else %}
+                    <a href="{% url 'myapp:login' %}">Login</a>
+                {% endif %}
+
+            </div>
+        </div>
+
+    </nav>
+
+    <div id="main-section">
+        {% block body %}
+        {% endblock %}
+    </div>
+
+    <script>
+        const height = document.getElementById('navbar').offsetHeight + 10 + 'px';
+        document.getElementById('main-section').style.marginTop = height;
+
+    </script>
+    
+</body>
+</html>

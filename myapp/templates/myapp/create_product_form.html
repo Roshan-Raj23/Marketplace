@@ -1,0 +1,29 @@
+{% extends 'myapp/base.html' %}
+
+{% block body %}
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="w-full flex justify-center items-center py-5">
+        <div class="w-1/2 p-5 bg-purple-100 shadow-xl flex flex-col justify-center items-center gap-5 rounded-lg py-10">
+            <div class="font-mono text-lg text-[#01838C]">
+                Add Product
+            </div>
+
+            {% for field in product_form %}
+                <div class="w-full">
+                    {{ field.label_tag }}
+                    {{ field}}
+                </div>
+            {% endfor %}
+
+            <div>
+                <button type="submit" class="cursor-pointer px-4 py-2 bg-green-500 text-white rounded-full hover:bg-green-600">Create</button>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+{% endblock %}

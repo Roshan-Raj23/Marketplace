@@ -1,0 +1,68 @@
+{% extends 'myapp/base.html' %}
+
+{% block body %}
+
+<section>
+    <div class="pl-10 pt-10 font-mono">
+        <div class="flex gap-5">
+            <div>
+                <div id="check-width" class="w-130 flex items-center justify-center">
+                    <img 
+                    class="rounded-md change-height"
+                    src="{{ product.file.url }}" alt="{{ product.name }}">
+                </div>
+            </div>
+            <div class="ml-10">
+                <p class="text-4xl my-4 font-semibold">{{ product.name }}</p>
+                <p>{{ product.description }}</p>
+                <p class="my-2 font-bold text-green-500">₹ {{ product.price }}</p>
+
+                <button class="my-3 rounded-full bg-blue-500 text-white px-4 py-2 cursor-pointer" id="buyNowButton" onclick="showQuantity()">
+                    Buy Now
+                </button>
+
+                <form method="POST" id="quantityForm" class="hidden my-4">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+
+                        {% for field in form %}
+                            <div>
+                                {{ field.label_tag }}
+                                {{ field }}
+                            </div>
+                        {% endfor %}
+                        
+                    </div>
+                    <button type="submit" class="my-3 rounded-full bg-blue-500 text-white px-4 py-2 cursor-pointer">
+                        Buy Now
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script>
+    const resizeInput = () => {
+        const input = document.getElementById('numberInput');
+        input.style.width = `${input.value.length + 8}ch`;
+    }
+
+    const showQuantity = () => {
+        const quantityForm = document.getElementById('quantityForm');
+        quantityForm.classList.toggle('hidden');
+
+        const buyNowButton = document.getElementById('buyNowButton');
+        buyNowButton.classList.toggle('hidden');
+    }
+
+    const changeHeight = document.getElementsByClassName('change-height');
+    Array.from(changeHeight).forEach((element) => {
+        const width = document.getElementById('check-width').offsetWidth + 'px';
+        element.style.maxHeight = width;
+    });
+</script>
+
+{% endblock %}

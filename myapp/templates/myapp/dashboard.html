@@ -1,0 +1,69 @@
+{% extends 'myapp/base.html' %}
+
+{% block body %}
+
+    <div class="py-3 pl-12 pr-6 space-y-10">
+        <div>
+            <div class="flex justify-between items-center">
+                <div class="font-mono text-xl font-semibold text-[#524D4D]">
+                    My Products
+                </div>
+                <div>
+                    <a href="{% url 'myapp:create_product' %}">
+                        <button class="bg-green-400 text-white rounded-full cursor-pointer py-3 px-5 hover:bg-green-500">Add Product</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="space-y-5">
+                {% for product in products %}
+                    <div class="group w-full grid grid-cols-2
+                    shadow-lg rounded-md bg-[#FBEBFF]">
+                        <div class="p-2 flex gap-3 items-center">
+                            <div class="w-50 flex justify-center items-center">
+                                <img src="{{ product.file.url }}" alt="{{ product.name }}" 
+                                class="h-25 rounded-md">
+
+                            </div>
+                            
+                            <div class="flex flex-col justify-center items-center group-hover:hidden">
+                                <div class="font-mono">{{ product.name }}</div>
+                                <div class="text-green-400 font-semibold">₹ {{ product.price }}</div>
+                            </div>
+
+                            <div class="ml-5 flex gap-5">
+                                <div class="hidden group-hover:block">
+                                    <a href="{% url 'myapp:update_product' product.id %}"><button class="px-5 py-2 rounded-full cursor-pointer bg-green-400 text-white hover:bg-green-500">Edit</button></a>
+                                </div>
+                                <div class="hidden group-hover:block">
+                                    <a href="{% url 'myapp:delete_product' product.id %}"><button class="px-5 py-2 rounded-full cursor-pointer bg-red-400 text-white hover:bg-red-500">Delete</button></a>
+                                </div>
+                            </div>
+
+
+                        </div>
+                            
+
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div class="text-2xl text-green-500">₹ {{ product.total_sales_amount }}</div>
+                                <div class="text-xs">Total earnings</div>
+                            </div>
+                            <div>
+                                <div class="text-2xl">{{ product.total_orders }}</div>
+                                <div class="text-xs">Total orders</div>
+                            </div>
+                            <div class="pr-5">
+                                <div class="text-2xl text-green-400">4.8</div>
+                                <div class="text-xs">Rating</div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
